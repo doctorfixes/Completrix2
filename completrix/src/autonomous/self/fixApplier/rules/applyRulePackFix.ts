@@ -12,9 +12,11 @@ export function applyRulePackFix(fix: Fix, index: RepoIndex): AppliedFix {
   }
   const existing = index.modules.filter(m => m.path.includes('/rules/')).length;
   const toAdd = Math.max(0, RULE_PACK_MIN - existing);
+  let firstPath: string | undefined;
   for (let i = 0; i < toAdd; i++) {
     const path = `${index.root}/src/rules/auto-rule-${existing + i + 1}.ts`;
+    if (i === 0) firstPath = path;
     index.modules.push({ path, type: ModuleType.Util, exports: [`rule${existing + i + 1}`] });
   }
-  return { fix, appliedAt: new Date().toISOString(), status: 'applied' };
+  return { fix, appliedAt: new Date().toISOString(), status: 'applied', filePath: firstPath };
 }

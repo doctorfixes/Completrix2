@@ -6,6 +6,7 @@ export interface AppliedFix {
   fix: Fix;
   appliedAt: string;
   status: 'applied' | 'skipped' | 'failed';
+  filePath?: string;
 }
 
 export interface CompletionReport {
@@ -13,4 +14,5 @@ export interface CompletionReport {
   remainingGaps: Gap[];
   appliedFixes: AppliedFix[];
   governancePlan: SelfGovernancePlan;
+  filesMutated: string[];
 }

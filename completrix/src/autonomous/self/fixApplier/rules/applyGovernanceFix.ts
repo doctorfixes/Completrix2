@@ -10,5 +10,5 @@ export function applyGovernanceFix(fix: Fix, index: RepoIndex): AppliedFix {
   }
   const path = `${index.root}/src/governance/auto-governance.ts`;
   index.modules.push({ path, type: ModuleType.Governance, exports: ['GovernanceRule'] });
-  return { fix, appliedAt: new Date().toISOString(), status: 'applied' };
+  return { fix, appliedAt: new Date().toISOString(), status: 'applied', filePath: path };
 }

@@ -8,10 +8,11 @@ export const selfCompleteCommand = new Command('self-complete')
     'Scan, fix, and apply fixes in a convergence loop until no gaps remain. Accepts RepoIndex JSON from argument or stdin.'
   )
   .argument('[repoIndex]', 'JSON of RepoIndex, or reads from stdin if omitted')
-  .action(async (indexArg?: string) => {
+  .option('--mutate', 'Write generated file stubs to disk in addition to updating the index', false)
+  .action(async (indexArg?: string, options?: { mutate?: boolean }) => {
     const raw = indexArg ?? await readStdin();
     const index = validateRepoIndex(JSON.parse(raw));
     const engine = new SelfCompleteEngineV1();
-    const result = await engine.complete(index);
+    const result = await engine.complete(index, options?.mutate ?? false);
     console.log(JSON.stringify(result, null, 2));
   });

@@ -4,9 +4,15 @@ import type { RepoIndex } from '../../../shared/v4/self/repoIndex.js';
 import { checkMutationSafety } from './safetyGuard.js';
 import { applyFixRules } from './applyFixRules.js';
 
+export interface WriteOperation {
+  path: string;
+  content: string;
+}
+
 export interface FixApplicationResult {
   appliedFixes: AppliedFix[];
   updatedIndex: RepoIndex;
+  writeOperations: WriteOperation[];
 }
 
 export class FixApplierV1 {
@@ -30,9 +36,14 @@ export class FixApplierV1 {
 
     const appliedFixes = applyFixRules(safeFixes, workingIndex);
 
+    const writeOperations: WriteOperation[] = appliedFixes
+      .filter(af => af.status === 'applied' && af.filePath !== undefined)
+      .map(af => ({ path: af.filePath!, content: af.fix.patch }));
+
     return {
       appliedFixes: [...appliedFixes, ...skippedFixes],
       updatedIndex: workingIndex,
+      writeOperations,
     };
   }
 }
