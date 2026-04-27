@@ -9,6 +9,7 @@ import { selfIndexCommand } from './commands/selfIndex.js';
 import { selfScanCommand } from './commands/selfScan.js';
 import { selfFixCommand } from './commands/selfFix.js';
 import { selfGovernCommand } from './commands/selfGovern.js';
+import { selfCompleteCommand } from './commands/selfComplete.js';
 
 const program = new Command();
 
@@ -26,5 +27,6 @@ program.addCommand(selfIndexCommand);
 program.addCommand(selfScanCommand);
 program.addCommand(selfFixCommand);
 program.addCommand(selfGovernCommand);
+program.addCommand(selfCompleteCommand);
 
 program.parse(process.argv);

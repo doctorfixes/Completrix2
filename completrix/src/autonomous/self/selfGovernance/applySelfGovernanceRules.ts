@@ -4,6 +4,7 @@ import { groupFixesIntoPhases } from './rules/groupFixesIntoPhases.js';
 import { derivePhaseDependencies } from './rules/derivePhaseDependencies.js';
 import { derivePhaseRisks } from './rules/derivePhaseRisks.js';
 import { deriveGlobalInvariants } from './rules/deriveGlobalInvariants.js';
+import { deriveMutationSafetyInvariants } from './rules/deriveMutationSafetyInvariants.js';
 
 export function applySelfGovernanceRules(fixes: Fix[]): SelfGovernancePlan {
   const phases = derivePhaseDependencies(groupFixesIntoPhases(fixes));
@@ -14,6 +15,9 @@ export function applySelfGovernanceRules(fixes: Fix[]): SelfGovernancePlan {
     invariants: [],
     risks,
   };
-  plan.invariants = deriveGlobalInvariants(plan);
+  plan.invariants = [
+    ...deriveGlobalInvariants(plan),
+    ...deriveMutationSafetyInvariants(plan),
+  ];
   return plan;
 }
