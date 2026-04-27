@@ -3,11 +3,14 @@ import { z } from 'zod';
 import { ClarificationEngineV4 } from '../../autonomous/clarification/clarificationEngineV4.js';
 import { readStdin } from '../stdinHelper.js';
 
-const clarifyInputSchema = z.object({ intent: z.string().min(1) });
+const clarifyInputSchema = z.union([
+  z.object({ intent: z.string().min(1) }),
+  z.string().min(1).transform(s => ({ intent: s })),
+]);
 
 export const clarifyCommand = new Command('clarify')
-  .description('Clarify a system intent. Accepts a JSON object {"intent":"..."} from argument or stdin.')
-  .argument('[input]', 'JSON object with intent field, or reads from stdin if omitted')
+  .description('Clarify a system intent. Accepts {"intent":"..."} or a plain JSON string from argument or stdin.')
+  .argument('[input]', 'JSON object {"intent":"..."} or plain JSON string, or reads from stdin if omitted')
   .action(async (input?: string) => {
     const raw = input ?? await readStdin();
     const parsed = clarifyInputSchema.parse(JSON.parse(raw));

@@ -8,7 +8,7 @@ export class SingleSystemWorkflow {
 
   async run(plan: ExecutionPlan): Promise<FinalSystemSpec> {
     return this.agent.run(plan, {
-      sessionId: `workflow-${Date.now()}`,
+      sessionId: `workflow-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       projectName: 'single-system-workflow',
       streaming: false,
       metadata: {},

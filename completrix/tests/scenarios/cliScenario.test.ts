@@ -135,7 +135,9 @@ describe('CLI Scenario: self-bootstrap flow (self-scan → self-fix → self-gov
     const gaps = await scanner.scan(index);
     expect(gaps.length).toBeGreaterThan(0);
     for (const g of gaps) {
-      expect(validateGap(g)).toBeTruthy();
+      validateGap(g);
+      expect(g).toHaveProperty('id');
+      expect(g).toHaveProperty('type');
     }
   });
 
@@ -155,7 +157,9 @@ describe('CLI Scenario: self-bootstrap flow (self-scan → self-fix → self-gov
     const fixes = await filler.fill(gaps);
     expect(fixes.length).toBeGreaterThan(0);
     for (const f of fixes) {
-      expect(validateFix(f)).toBeTruthy();
+      validateFix(f);
+      expect(f).toHaveProperty('id');
+      expect(f).toHaveProperty('gapId');
     }
   });
 
