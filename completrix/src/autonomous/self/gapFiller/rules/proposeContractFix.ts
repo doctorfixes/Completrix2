@@ -10,7 +10,7 @@ export function proposeContractFix(gap: Gap): Fix | null {
     gapId: gap.id,
     type: FixType.AddContract,
     description: `Add missing contract: ${gap.description}`,
-    patch: `// TODO: create contract interface`,
+    patch: `export interface Contract {\n  id: string;\n  version: string;\n}\n`,
     estimatedEffort: 2,
   };
 }

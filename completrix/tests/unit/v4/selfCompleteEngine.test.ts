@@ -36,6 +36,7 @@ describe('SelfCompleteEngineV1', () => {
     expect(result).toHaveProperty('remainingGaps');
     expect(result).toHaveProperty('appliedFixes');
     expect(result).toHaveProperty('governancePlan');
+    expect(result).toHaveProperty('filesMutated');
   });
 
   it('should return status "complete" when no gaps remain after fixing', async () => {
@@ -93,5 +94,17 @@ describe('SelfCompleteEngineV1', () => {
       inv.toLowerCase().includes('mutation') || inv.toLowerCase().includes('circular')
     );
     expect(hasMutationSafety).toBe(true);
+  });
+
+  it('should return an empty filesMutated array when mutate is false', async () => {
+    const engine = new SelfCompleteEngineV1();
+    const result = await engine.complete(emptyIndex, false);
+    expect(result.filesMutated).toHaveLength(0);
+  });
+
+  it('should return an empty filesMutated array for a fully populated index even when mutate is true', async () => {
+    const engine = new SelfCompleteEngineV1();
+    const result = await engine.complete(fullIndex, true);
+    expect(result.filesMutated).toHaveLength(0);
   });
 });

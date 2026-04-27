@@ -10,7 +10,7 @@ export function proposeSchemaFix(gap: Gap): Fix | null {
     gapId: gap.id,
     type: FixType.FixSchema,
     description: `Fix schema inconsistency: ${gap.description}`,
-    patch: `// TODO: add missing Zod schema`,
+    patch: `import { z } from 'zod';\n\nexport const autoSchema = z.object({\n  id: z.string(),\n  version: z.string(),\n});\n`,
     estimatedEffort: 2,
   };
 }

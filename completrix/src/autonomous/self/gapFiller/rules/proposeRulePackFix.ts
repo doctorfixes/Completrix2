@@ -10,7 +10,7 @@ export function proposeRulePackFix(gap: Gap): Fix | null {
     gapId: gap.id,
     type: FixType.AddRulePack,
     description: `Complete rule pack: ${gap.description}`,
-    patch: `// TODO: add missing rules to pack`,
+    patch: `export function autoRule(input: unknown): boolean {\n  return input !== null && input !== undefined;\n}\n`,
     estimatedEffort: 3,
   };
 }

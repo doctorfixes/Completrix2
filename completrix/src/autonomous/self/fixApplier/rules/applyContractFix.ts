@@ -10,5 +10,5 @@ export function applyContractFix(fix: Fix, index: RepoIndex): AppliedFix {
   }
   const path = `${index.root}/src/contracts/auto-contract.ts`;
   index.modules.push({ path, type: ModuleType.Contract, exports: ['Contract'] });
-  return { fix, appliedAt: new Date().toISOString(), status: 'applied' };
+  return { fix, appliedAt: new Date().toISOString(), status: 'applied', filePath: path };
 }

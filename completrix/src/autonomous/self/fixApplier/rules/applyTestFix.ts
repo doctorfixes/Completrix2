@@ -10,5 +10,5 @@ export function applyTestFix(fix: Fix, index: RepoIndex): AppliedFix {
   }
   const path = `${index.root}/tests/auto.test.ts`;
   index.modules.push({ path, type: ModuleType.Test, exports: [] });
-  return { fix, appliedAt: new Date().toISOString(), status: 'applied' };
+  return { fix, appliedAt: new Date().toISOString(), status: 'applied', filePath: path };
 }

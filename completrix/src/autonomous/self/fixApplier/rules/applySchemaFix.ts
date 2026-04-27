@@ -11,9 +11,11 @@ export function applySchemaFix(fix: Fix, index: RepoIndex): AppliedFix {
   const contracts = index.modules.filter(m => m.type === ModuleType.Contract).length;
   const schemas = index.modules.filter(m => m.type === ModuleType.Schema).length;
   const toAdd = Math.max(0, contracts - schemas);
+  let firstPath: string | undefined;
   for (let i = 0; i < toAdd; i++) {
     const path = `${index.root}/src/schemas/auto-schema-${schemas + i + 1}.ts`;
+    if (i === 0) firstPath = path;
     index.modules.push({ path, type: ModuleType.Schema, exports: [`autoSchema${schemas + i + 1}`] });
   }
-  return { fix, appliedAt: new Date().toISOString(), status: 'applied' };
+  return { fix, appliedAt: new Date().toISOString(), status: 'applied', filePath: firstPath };
 }

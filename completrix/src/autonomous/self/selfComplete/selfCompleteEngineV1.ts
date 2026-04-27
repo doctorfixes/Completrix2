@@ -3,6 +3,7 @@ import type { AppliedFix, CompletionReport } from '../../../shared/v4/self/compl
 import { GapScannerV4 } from '../gapScanner/gapScannerV4.js';
 import { GapFillerV4 } from '../gapFiller/gapFillerV4.js';
 import { FixApplierV1 } from '../fixApplier/fixApplierV1.js';
+import { FileMutationEngine } from '../fixApplier/fileMutationEngine.js';
 import { SelfGovernancePlannerV4 } from '../selfGovernance/selfGovernancePlannerV4.js';
 
 const MAX_ITERATIONS = 10;
@@ -13,13 +14,16 @@ export class SelfCompleteEngineV1 {
   private readonly applier = new FixApplierV1();
   private readonly planner = new SelfGovernancePlannerV4();
 
-  async complete(repoIndex: RepoIndex): Promise<CompletionReport> {
+  async complete(repoIndex: RepoIndex, mutate = false): Promise<CompletionReport> {
+    const mutationEngine = mutate ? new FileMutationEngine() : null;
+
     let workingIndex: RepoIndex = {
       ...repoIndex,
       modules: [...repoIndex.modules],
     };
 
     const allAppliedFixes: AppliedFix[] = [];
+    const allFilesMutated: string[] = [];
     let remainingGaps = await this.scanner.scan(workingIndex);
 
     for (let iteration = 0; iteration < MAX_ITERATIONS && remainingGaps.length > 0; iteration++) {
@@ -29,6 +33,11 @@ export class SelfCompleteEngineV1 {
       const result = this.applier.apply(fixes, workingIndex);
       allAppliedFixes.push(...result.appliedFixes);
       workingIndex = result.updatedIndex;
+
+      if (mutationEngine && result.writeOperations.length > 0) {
+        const written = mutationEngine.write(result.writeOperations);
+        allFilesMutated.push(...written);
+      }
 
       remainingGaps = await this.scanner.scan(workingIndex);
     }
@@ -41,6 +50,7 @@ export class SelfCompleteEngineV1 {
       remainingGaps,
       appliedFixes: allAppliedFixes,
       governancePlan,
+      filesMutated: allFilesMutated,
     };
   }
 }

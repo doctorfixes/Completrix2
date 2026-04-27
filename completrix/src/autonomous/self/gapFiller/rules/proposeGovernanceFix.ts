@@ -10,7 +10,7 @@ export function proposeGovernanceFix(gap: Gap): Fix | null {
     gapId: gap.id,
     type: FixType.AddGovernance,
     description: `Add governance rules: ${gap.description}`,
-    patch: `// TODO: create governance.json`,
+    patch: `export const GovernanceRule = {\n  id: 'auto-governance',\n  description: 'Auto-generated governance rule',\n  enforce: () => true,\n};\n`,
     estimatedEffort: 3,
   };
 }
