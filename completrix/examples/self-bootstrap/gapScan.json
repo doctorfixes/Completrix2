@@ -1,0 +1,9 @@
+[
+  {
+    "id": "gap-missing-module-util",
+    "type": "missing-module",
+    "severity": "high",
+    "description": "No modules of type 'util' found in repo index",
+    "affectedPaths": ["/home/runner/work/Completrix2/Completrix2/completrix"]
+  }
+]

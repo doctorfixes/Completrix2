@@ -1,0 +1,14 @@
+{
+  "original": "Build a simple microservices e-commerce platform with product catalog, cart, and checkout services",
+  "clarified": "Build a microservices e-commerce platform comprising: (1) Product Catalog Service for managing products, (2) Cart Service for managing user carts, (3) Checkout Service for order processing",
+  "assumptions": [
+    "RESTful APIs between services",
+    "Containerized deployment (Docker/Kubernetes)",
+    "PostgreSQL for persistence"
+  ],
+  "questions": [
+    "What is the expected peak load?",
+    "Should services share a database or have separate databases?",
+    "Is real-time inventory required?"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "version": "4.0.0",
+  "invariants": [
+    {
+      "id": "no-circular-deps",
+      "description": "No circular dependencies between modules",
+      "severity": "critical"
+    },
+    {
+      "id": "contracts-have-schemas",
+      "description": "All contracts must have corresponding Zod schemas",
+      "severity": "high"
+    },
+    {
+      "id": "engines-are-tested",
+      "description": "All engines must have unit tests",
+      "severity": "high"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "max-complexity",
+      "description": "Maximum cyclomatic complexity per module",
+      "maxValue": 10
+    }
+  ],
+  "driftRules": [
+    {
+      "id": "schema-change-alert",
+      "description": "Alert on schema changes",
+      "trigger": "schema-modification",
+      "action": "alert"
+    }
+  ]
+}

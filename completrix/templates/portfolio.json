@@ -1,0 +1,14 @@
+{
+  "$schema": "completrix/portfolio",
+  "systems": [
+    {
+      "id": "system-id",
+      "name": "System Name",
+      "description": "System description",
+      "version": "1.0.0",
+      "clusters": [],
+      "contracts": [],
+      "dependencies": { "nodes": [], "edges": [] }
+    }
+  ]
+}

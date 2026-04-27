@@ -1,0 +1,10 @@
+[
+  {
+    "id": "fix-gap-missing-module-util",
+    "gapId": "gap-missing-module-util",
+    "type": "add-module",
+    "description": "Add missing module to address: No modules of type 'util' found in repo index",
+    "patch": "// TODO: create module at /home/runner/work/Completrix2/Completrix2/completrix",
+    "estimatedEffort": 4
+  }
+]

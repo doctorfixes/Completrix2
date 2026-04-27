@@ -1,0 +1,14 @@
+{
+  "root": "/home/runner/work/Completrix2/Completrix2/completrix",
+  "modules": [
+    { "path": "src/autonomous/clarification/clarificationEngineV4.ts", "type": "engine", "exports": ["ClarificationEngineV4"] },
+    { "path": "src/autonomous/decomposition/decompositionEngineV4.ts", "type": "engine", "exports": ["DecompositionEngineV4"] },
+    { "path": "src/shared/v4/contracts/FinalSystemSpec.ts", "type": "contract", "exports": ["FinalSystemSpec"] },
+    { "path": "src/shared/v4/schemas/finalSystemSpecSchema.ts", "type": "schema", "exports": ["finalSystemSpecSchema"] },
+    { "path": "src/runtime/agents/clarificationAgent.ts", "type": "agent", "exports": ["ClarificationAgent"] },
+    { "path": "src/runtime/governance/invariantEnforcer.ts", "type": "governance", "exports": ["InvariantEnforcer"] },
+    { "path": "tests/unit/v4/clarification.test.ts", "type": "test", "exports": [] }
+  ],
+  "lastScanned": "2024-01-01T00:00:00.000Z",
+  "totalFiles": 7
+}

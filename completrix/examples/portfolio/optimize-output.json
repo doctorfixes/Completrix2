@@ -1,0 +1,17 @@
+{
+  "portfolioId": "portfolio-001",
+  "systems": [
+    { "systemId": "ecommerce", "name": "E-Commerce Platform", "value": 20, "priority": 1 },
+    { "systemId": "analytics", "name": "Analytics Dashboard", "value": 10, "priority": 2 }
+  ],
+  "optimizations": [
+    {
+      "id": "opt-1",
+      "type": "consolidation",
+      "description": "Consolidate shared authentication service",
+      "impact": 0.15,
+      "affectedSystems": ["ecommerce", "analytics"]
+    }
+  ],
+  "totalValue": 30
+}
