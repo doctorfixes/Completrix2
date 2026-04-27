@@ -1,12 +1,14 @@
 import { Command } from 'commander';
 import { DecompositionEngineV4 } from '../../autonomous/decomposition/decompositionEngineV4.js';
-import type { FinalSystemSpec } from '../../shared/v4/contracts/FinalSystemSpec.js';
+import { validateFinalSystemSpec } from '../../shared/v4/schemas/finalSystemSpecSchema.js';
+import { readStdin } from '../stdinHelper.js';
 
 export const decomposeCommand = new Command('decompose')
-  .description('Decompose a system spec into cluster structure')
-  .argument('<spec>', 'JSON string of FinalSystemSpec')
-  .action(async (specJson: string) => {
-    const spec = JSON.parse(specJson) as FinalSystemSpec;
+  .description('Decompose a system spec into cluster structure. Accepts FinalSystemSpec JSON from argument or stdin.')
+  .argument('[spec]', 'JSON string of FinalSystemSpec, or reads from stdin if omitted')
+  .action(async (specArg?: string) => {
+    const raw = specArg ?? await readStdin();
+    const spec = validateFinalSystemSpec(JSON.parse(raw));
     const engine = new DecompositionEngineV4({
       sessionId: `cli-${Date.now()}`,
       projectName: 'cli',
