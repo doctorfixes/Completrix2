@@ -34,3 +34,28 @@ Or generate the index file first, then scan:
 completrix self-index > repoIndex.json
 completrix self-scan < repoIndex.json
 ```
+
+## Self-Fix from Gaps
+
+Generate fixes from a `gaps.json` file produced by `self-scan`:
+
+```bash
+completrix self-fix < gaps.json > fixes.json
+```
+
+## Full Self-Bootstrap Pipeline
+
+Run the complete self-improvement cycle — index, scan, fix, and govern — writing each stage to a file:
+
+```bash
+completrix self-index > repoIndex.json
+completrix self-scan < repoIndex.json > gaps.json
+completrix self-fix < gaps.json > fixes.json
+completrix self-govern < fixes.json > governance.json
+```
+
+Or stream the entire pipeline in one pass:
+
+```bash
+completrix self-index | completrix self-scan | completrix self-fix | completrix self-govern
+```
