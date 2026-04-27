@@ -1,0 +1,13 @@
+{
+  "$schema": "completrix/repo-index",
+  "root": "/path/to/your/project",
+  "modules": [
+    {
+      "path": "src/your-module.ts",
+      "type": "engine",
+      "exports": ["YourExport"]
+    }
+  ],
+  "lastScanned": "2024-01-01T00:00:00.000Z",
+  "totalFiles": 1
+}

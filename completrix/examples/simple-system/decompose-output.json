@@ -1,0 +1,26 @@
+{
+  "clusters": {
+    "catalog": {
+      "id": "catalog",
+      "name": "Product Catalog",
+      "type": "service",
+      "metadata": { "modules": ["product-service"] }
+    },
+    "cart": {
+      "id": "cart",
+      "name": "Cart Service",
+      "type": "service",
+      "metadata": { "modules": ["cart-service"] }
+    },
+    "checkout": {
+      "id": "checkout",
+      "name": "Checkout Service",
+      "type": "service",
+      "metadata": { "modules": ["checkout-service"] }
+    }
+  },
+  "edges": [
+    { "from": "cart", "to": "catalog", "label": "calls" },
+    { "from": "checkout", "to": "cart", "label": "calls" }
+  ]
+}

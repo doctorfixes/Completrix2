@@ -1,0 +1,22 @@
+{
+  "systems": [
+    {
+      "id": "ecommerce",
+      "name": "E-Commerce Platform",
+      "description": "Online retail system",
+      "version": "1.0.0",
+      "clusters": [{"id": "catalog", "name": "Catalog", "modules": ["products"], "responsibilities": ["product management"]}],
+      "contracts": [],
+      "dependencies": {"nodes": ["catalog"], "edges": []}
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics Dashboard",
+      "description": "Business intelligence system",
+      "version": "1.0.0",
+      "clusters": [{"id": "reporting", "name": "Reporting", "modules": ["reports"], "responsibilities": ["data analysis"]}],
+      "contracts": [],
+      "dependencies": {"nodes": ["reporting"], "edges": []}
+    }
+  ]
+}

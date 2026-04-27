@@ -1,0 +1,9 @@
+{
+  "$schema": "completrix/system-intent",
+  "intent": "Describe your system intent here",
+  "context": {
+    "domain": "your-domain",
+    "constraints": [],
+    "preferences": []
+  }
+}
