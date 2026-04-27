@@ -4,8 +4,8 @@ import type { Gap } from '../../shared/v4/self/gaps.js';
 import type { Fix } from '../../shared/v4/self/fixes.js';
 import { GapFillerV4 } from '../../autonomous/self/gapFiller/gapFillerV4.js';
 
-export class SelfFixAgent implements Agent<Gap[], Fix[]> {
-  readonly name = 'self-fix-agent';
+export class GapFillerAgent implements Agent<Gap[], Fix[]> {
+  readonly name = 'gap-filler-agent';
 
   async run(input: Gap[], _ctx: RuntimeContext): Promise<Fix[]> {
     const filler = new GapFillerV4();
