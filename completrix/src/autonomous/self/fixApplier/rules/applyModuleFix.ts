@@ -9,7 +9,9 @@ export function applyModuleFix(fix: Fix, index: RepoIndex): AppliedFix {
     return { fix, appliedAt: new Date().toISOString(), status: 'skipped' };
   }
   const typeMatch = fix.gapId.match(/^gap-missing-module-(.+)$/);
-  const moduleType = (typeMatch?.[1] ?? 'engine') as ModuleType;
+  const rawType = typeMatch?.[1];
+  const validTypes = Object.values(ModuleType) as string[];
+  const moduleType = (rawType && validTypes.includes(rawType) ? rawType : ModuleType.Engine) as ModuleType;
   const path = `${index.root}/src/${moduleType}/auto-${moduleType}.ts`;
   index.modules.push({ path, type: moduleType, exports: [moduleType] });
   return { fix, appliedAt: new Date().toISOString(), status: 'applied' };

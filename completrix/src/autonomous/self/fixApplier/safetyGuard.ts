@@ -11,7 +11,7 @@ export function checkMutationSafety(fixes: Fix[]): SafetyViolation[] {
 
   for (const fix of fixes) {
     if (!fix.id || !fix.gapId || !fix.description || !fix.patch) {
-      violations.push({ fixId: fix.id, reason: 'Fix has missing required fields' });
+      violations.push({ fixId: fix.id || fix.gapId || 'unknown', reason: 'Fix has missing required fields' });
       continue;
     }
 
